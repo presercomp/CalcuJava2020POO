@@ -5,6 +5,7 @@
  */
 package views;
 
+import controllers.Operations;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,10 +15,17 @@ import javax.swing.JOptionPane;
 public class Principal extends javax.swing.JFrame {
 
     /**
+     * Atributos de la clase
+     */
+    public double memoria;
+    public String ultimo_operador;
+    /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
+        this.memoria = 0;
+        this.ultimo_operador = "";
     }
 
     /**
@@ -84,21 +92,41 @@ public class Principal extends javax.swing.JFrame {
         btn_corregir.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         btn_corregir.setForeground(new java.awt.Color(255, 255, 255));
         btn_corregir.setText("←");
+        btn_corregir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_corregirActionPerformed(evt);
+            }
+        });
 
         btn_borrar.setBackground(new java.awt.Color(0, 0, 0));
         btn_borrar.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         btn_borrar.setForeground(new java.awt.Color(255, 255, 255));
         btn_borrar.setText("CE");
+        btn_borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_borrarActionPerformed(evt);
+            }
+        });
 
         btn_reiniciar.setBackground(new java.awt.Color(0, 0, 0));
         btn_reiniciar.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         btn_reiniciar.setForeground(new java.awt.Color(255, 255, 255));
         btn_reiniciar.setText("C");
+        btn_reiniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_reiniciarActionPerformed(evt);
+            }
+        });
 
         btn_dividido.setBackground(new java.awt.Color(0, 0, 0));
         btn_dividido.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         btn_dividido.setForeground(new java.awt.Color(255, 255, 255));
         btn_dividido.setText("÷");
+        btn_dividido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_divididoActionPerformed(evt);
+            }
+        });
 
         btn_nueve.setBackground(new java.awt.Color(0, 0, 0));
         btn_nueve.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
@@ -114,6 +142,11 @@ public class Principal extends javax.swing.JFrame {
         btn_por.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         btn_por.setForeground(new java.awt.Color(255, 255, 255));
         btn_por.setText("x");
+        btn_por.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_porActionPerformed(evt);
+            }
+        });
 
         btn_siete.setBackground(new java.awt.Color(0, 0, 0));
         btn_siete.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
@@ -149,6 +182,11 @@ public class Principal extends javax.swing.JFrame {
         btn_menos.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         btn_menos.setForeground(new java.awt.Color(255, 255, 255));
         btn_menos.setText("-");
+        btn_menos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_menosActionPerformed(evt);
+            }
+        });
 
         btn_cuatro.setBackground(new java.awt.Color(0, 0, 0));
         btn_cuatro.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
@@ -184,6 +222,11 @@ public class Principal extends javax.swing.JFrame {
         btn_mas.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         btn_mas.setForeground(new java.awt.Color(255, 255, 255));
         btn_mas.setText("+");
+        btn_mas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_masActionPerformed(evt);
+            }
+        });
 
         btn_uno.setBackground(new java.awt.Color(0, 0, 0));
         btn_uno.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
@@ -209,6 +252,11 @@ public class Principal extends javax.swing.JFrame {
         btn_igual.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         btn_igual.setForeground(new java.awt.Color(255, 255, 255));
         btn_igual.setText("=");
+        btn_igual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_igualActionPerformed(evt);
+            }
+        });
 
         btn_cero.setBackground(new java.awt.Color(0, 0, 0));
         btn_cero.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
@@ -369,6 +417,73 @@ public class Principal extends javax.swing.JFrame {
         this.escribirPantalla(".");
     }//GEN-LAST:event_btn_decimalActionPerformed
 
+    private void btn_corregirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_corregirActionPerformed
+        String pantalla = txt_pantalla.getText(); //capturamos el texto que haya en pantalla
+        int largo_pantalla = pantalla.length(); //contamos los caracteres que hay en pantalla
+        if (largo_pantalla > 1){
+            pantalla = pantalla.substring(0, largo_pantalla - 1); 
+        } else {
+            pantalla = "0";
+        }
+        txt_pantalla.setText(pantalla);
+    }//GEN-LAST:event_btn_corregirActionPerformed
+
+    private void btn_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_borrarActionPerformed
+        txt_pantalla.setText("0");
+    }//GEN-LAST:event_btn_borrarActionPerformed
+
+    private void btn_reiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reiniciarActionPerformed
+        txt_pantalla.setText("0");
+        this.memoria = 0;
+        this.ultimo_operador = ""; 
+    }//GEN-LAST:event_btn_reiniciarActionPerformed
+
+    private void btn_masActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_masActionPerformed
+        ejecutaOP("+");
+    }//GEN-LAST:event_btn_masActionPerformed
+
+    private void btn_menosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menosActionPerformed
+        ejecutaOP("-");
+    }//GEN-LAST:event_btn_menosActionPerformed
+
+    private void btn_porActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_porActionPerformed
+        ejecutaOP("*");
+    }//GEN-LAST:event_btn_porActionPerformed
+
+    private void btn_divididoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_divididoActionPerformed
+       ejecutaOP("/");
+    }//GEN-LAST:event_btn_divididoActionPerformed
+
+    private void btn_igualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_igualActionPerformed
+        ejecutaOP("");
+        txt_pantalla.setText(Double.toString(this.memoria));
+        this.memoria = 0;
+    }//GEN-LAST:event_btn_igualActionPerformed
+
+    private void ejecutaOP(String sign){
+        Operations op = new Operations();
+        Double num_pantalla = Double.parseDouble(txt_pantalla.getText());
+        if(this.ultimo_operador.equals("")){
+           this.memoria = num_pantalla;
+       } else {
+           switch(this.ultimo_operador){
+               case "+":
+                   this.memoria = op.add(memoria, num_pantalla);
+               break;
+               case "-":
+                    this.memoria = op.substract(memoria, num_pantalla);
+               break;
+               case "*":
+                    this.memoria = op.multiply(memoria, num_pantalla);
+               break;
+               case "/":
+                    this.memoria = op.divide(memoria, num_pantalla);
+               break;
+           }
+       }
+        txt_pantalla.setText("0");
+        this.ultimo_operador = sign;
+    }
     private void escribirPantalla(String caracter){
         //Primero, capturamos lo que hay en la pantalla
         String pantalla = txt_pantalla.getText();
